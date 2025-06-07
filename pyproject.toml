@@ -5,8 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "asyncpg>=0.30.0",
     "fastapi[standard]",
+    "greenlet>=3.2.3",
+    "pydantic-settings>=2.9.1",
     "pytest>=8.4.0",
+    "sqlmodel>=0.0.24",
 ]
 
 [tool.pytest.ini_options]

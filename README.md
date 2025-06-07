@@ -81,3 +81,23 @@ There are two most popular ORM implementatation in Python ecosystem as per today
 
 - SQL Model (Implemented by creator of FastAPI)
 - SQL Alchemy
+
+## PostgreSQL
+
+Database is currently setup as Docker Copose container. Intent is to integrate it when project grows to Dockerized environemnt.
+
+```bash
+docker-compose up - d
+```
+
+### Connect to DB via Docker
+
+```bash
+docker exec -it postgres-db psql -U psql_user -d bookly_db
+```
+
+### Connect via DBeaver
+
+To connect to the database using DBeaver, you can use the following configuration:
+
+![DBeaver Connection Settings](dbeaver_config.png)
