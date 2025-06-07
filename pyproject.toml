@@ -5,7 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "black>=25.1.0",
     "fastapi[standard]",
-    "mypy>=1.16.0",
+    "pytest>=8.4.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["test"]
+addopts = "-vv"

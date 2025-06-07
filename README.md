@@ -4,7 +4,48 @@ Small FastAPI tutorial to get familiar with backend developement.
 
 <https://youtu.be/TO4aQ3ghFOc>
 
-## Installation
+## Installation & Running server
+
+Project depends on `uv` package manager.
+
+```bash
+uv sync
+```
+
+Runnign the server
+
+```bash
+uv run fastapi dev src/
+```
+
+## Debuging FastAPI in VS Code
+
+Debugging of FAST API based application in VS Code can be implemented using `launch.json` file.
+You can set breakpoints after starting debug server to, applicaiton with stop it's execution allowing
+to see it's state and ispect database contents when program will reach breakpoint.
+
+```json
+"configurations": [
+    {
+      "name": "Python Debugger: FastAPI",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": ["src:app", "--reload"],
+      "jinja": true
+    }
+  ]
+```
+
+## Testing
+
+Test for API endpoints is implemented using `pytest` modeule.
+
+To execute test cases run following command in project root
+
+```bash
+uv run pytest
+```
 
 ## CURL
 
@@ -26,34 +67,17 @@ curl -X POST http://127.0.0.1:8000/books \
 
 FastAPI routers help you organize your application by grouping related endpoints into separate modules. This makes your codebase more modular and maintainable.
 
-### Example: Creating and Including a Router
-
-First, create a router in a separate file (e.g., `routers/books.py`):
-
 ```python
-from fastapi import APIRouter
-
-router = APIRouter()
-
-@router.get("/books")
-def read_books():
-    return [{"id": 1, "title": "1984"}]
+version = "v1"
+app = FastAPI(version=version)
+app.include_router(book_router, prefix=f"/api/{version}/books", tags=["books"])
 ```
 
-Then, include the router in your main application (`main.py`):
+## ORM - Object Relation Model
 
-```python
-from fastapi import FastAPI
-from routers import books
+ORM is managing interaciton with database and creation of tables within it. It makes types translation and allows to exectue SQL querys on DB.
 
-app = FastAPI()
-app.include_router(books.router)
-```
+There are two most popular ORM implementatation in Python ecosystem as per today.
 
-### Benefits
-
-- **Separation of concerns:** Keep related routes together.
-- **Reusability:** Easily share routers across projects.
-- **Scalability:** Simplifies adding new features as your API grows.
-
-For more details, see the [FastAPI documentation on routers](https://fastapi.tiangolo.com/tutorial/bigger-applications/).
+- SQL Model (Implemented by creator of FastAPI)
+- SQL Alchemy
